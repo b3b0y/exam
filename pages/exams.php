@@ -265,24 +265,26 @@ $button = false;
                                             {
                                                 #Category Question/story
                                 ?>
-                                                <div class="col-lg-4">
-                                                    <div class="panel panel-primary">
-                                                        <div class="panel-heading">
-                                                            Read the Selection below
+                                                 <div class="panel-body">
+                                                    <div class="col-lg-12">
+                                                        <div class="panel panel-primary">
+                                                            <div class="panel-heading">
+                                                                Read the Selection below
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <?php echo $row1['description']; ?>
+                                                            </div>
+                                                            <?php
+                                                                if(isset($row1['image_url']) && $row1['image_url'] != "")
+                                                                {
+                                                            ?>
+                                                            <div class="panel-body">
+                                                                <img src="<?php echo $row1['image_url']; ?>">
+                                                            </div>
+                                                            <?php
+                                                                }
+                                                            ?>
                                                         </div>
-                                                        <div class="panel-body">
-                                                            <?php echo $row1['description']; ?>
-                                                        </div>
-                                                        <?php
-                                                            if(isset($row1['image_url']) && $row1['image_url'] != "")
-                                                            {
-                                                        ?>
-                                                        <div class="panel-body">
-                                                            <img src="<?php echo $row1['image_url']; ?>">
-                                                        </div>
-                                                        <?php
-                                                            }
-                                                        ?>
                                                     </div>
                                                 </div>
                                             <?php
@@ -307,7 +309,7 @@ $button = false;
                                                                         Qeustion <?php echo $count; ?> of  
                                                                         <?php 
                                                                             #count questions
-                                                                            $result37 = mysql_query("SELECT * FROM questions ");
+                                                                            $result37 = mysql_query("SELECT * FROM questions WHERE subject_id = '".$_GET['id']."'");
                                                                             echo   $totalQuestion = mysql_num_rows($result37); 
                                                                         
                                                                         ?>
@@ -325,7 +327,7 @@ $button = false;
                                                                     ?>
                                                                             <div class="col-lg-4">
                                                                                 <div class="well well-sm">
-                                                                                     <img src="<?php echo $row3['image_url']; ?>">   
+                                                                                     <img  src="<?php echo $row3['image_url']; ?>">   
                                                                                 </div>
                                                                             </div>
                                                                     <?php 
@@ -376,13 +378,13 @@ $button = false;
                                                       $count++;  
 
                                     ?>        
-                                    
+
 
                                                         <div class="alert alert-info">
                                                             Question <?php echo $count; ?> of  
                                                            <?php 
 
-                                                                $result37 = mysql_query("SELECT * FROM questions ");
+                                                                $result37 = mysql_query("SELECT * FROM questions WHERE subject_id = '".$_GET['id']."'");
                                                                 echo  mysql_num_rows($result37); 
                                                             
                                                             ?>
@@ -406,6 +408,7 @@ $button = false;
                                                             }
 
                                                         ?>
+                                                        <p style="border-bottom: 2px dashed #cccccc;margin-top: 1px;"></p>
                                                         <div class="row show-grid">
                                                             <?php
 

@@ -160,12 +160,14 @@ if(isset($_POST['subj']))
                                                 for ($i= 0; $i <= $_POST['row'] - 1 ; $i++) 
                                                 { 
                                             ?>
+
+                                            <p style="border-bottom: 2px dashed #cccccc;margin-top: 1px;"></p>
+
                                             <div class="form-group">
                                                 <label>Answer <?php echo $i + 1; ?></label>
                                                 <input name="text[<?php echo $i; ?>]" type="text" class="form-control" placeholder="text" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Correct</label>
                                                 <div class="checkbox">
                                                     <label>
                                                         <input name="correct[<?php echo $i; ?>]" type="checkbox" value="1"> Select if Correct 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 11, 2016 at 06:44 AM
+-- Generation Time: Jan 11, 2016 at 06:55 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `text` varchar(500) NOT NULL,
   `correct` enum('1','0') NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=92 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
 
 --
 -- Dumping data for table `answers`
@@ -125,7 +125,87 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `correct`) VALUES
 (86, 23, 'sunny day', ''),
 (87, 23, 'pleasant day', ''),
 (90, 25, 'Rice Terraces of the Mountain', ''),
-(91, 25, 'The Pearl of the Orient Seas', '1');
+(91, 25, 'The Pearl of the Orient Seas', '1'),
+(92, 26, 'hydrogeb', ''),
+(93, 26, 'smoke', '1'),
+(94, 26, 'water vapor', ''),
+(95, 26, 'oxygen', ''),
+(96, 27, 'salt', ''),
+(97, 27, 'sugar', ''),
+(98, 27, 'sand', '1'),
+(99, 27, 'coffee', ''),
+(100, 28, 'drink the contents of the glass', ''),
+(101, 28, 'stir the contents of the glass', '1'),
+(102, 28, 'turn on the electric fan in front of the glass', ''),
+(103, 28, 'non of the above', ''),
+(104, 29, 'Energy is found every where', ''),
+(105, 29, 'Energy is the ability to do work', '1'),
+(106, 29, 'Energy comes from inside the Earth', ''),
+(107, 29, 'Energy destroys matter', ''),
+(108, 30, 'The food is physically changed', ''),
+(109, 30, 'The food is spoiled', ''),
+(110, 30, 'The food is chemically changed', '1'),
+(111, 30, 'The food does not taste goo', ''),
+(112, 31, 'It supports the body', ''),
+(113, 31, 'It allows the body to move', ''),
+(114, 31, 'It protects some of the body organs', ''),
+(115, 31, 'It sends messages to the muscles', '1'),
+(116, 32, 'Ingestion', ''),
+(117, 32, 'Digestion', '1'),
+(118, 32, 'Absorption', ''),
+(119, 32, 'Defecation', ''),
+(120, 33, 'The bar soap has more surfaces exposed to the water.', ''),
+(121, 33, 'The bar soap has a shape that make it dissolve faster.', ''),
+(122, 33, 'The powdered soap has more tiny particles exposed to the water.', '1'),
+(123, 33, 'All of the Above', ''),
+(124, 34, 'When the wind blows, it carries the foul air', ''),
+(125, 34, 'When the garbage decays, it produces foul air.', '1'),
+(126, 34, 'The garbage contains used cans and bottles.', ''),
+(127, 34, 'The garbage is buried', ''),
+(128, 34, 'skull', '1'),
+(129, 35, 'Ribs', '0'),
+(130, 35, 'Jawbone', '0'),
+(131, 35, 'collarbone', '0'),
+(138, 36, '2,648 r. 2', ''),
+(137, 36, '2,641', ''),
+(136, 36, '2,651', '1'),
+(139, 36, '2,948 r.4', ''),
+(140, 37, '24', ''),
+(141, 37, '48', ''),
+(142, 37, '512', '1'),
+(143, 37, '6,561', ''),
+(144, 38, '2', ''),
+(145, 38, '20', ''),
+(146, 38, '50', '1'),
+(147, 38, '200', ''),
+(148, 39, '137.834', ''),
+(149, 39, '146.834', ''),
+(150, 39, '147.734', ''),
+(151, 39, '147.834', '1'),
+(152, 40, '10', ''),
+(153, 40, '100', ''),
+(154, 40, '1000', '1'),
+(155, 40, '10000', ''),
+(156, 41, '85m', ''),
+(157, 41, '850m', ''),
+(158, 41, '8500m', '1'),
+(159, 41, '0.085m', ''),
+(160, 42, '9/10', ''),
+(161, 42, '1 1/20', '1'),
+(162, 42, '1 1/10', ''),
+(163, 42, '1 3/20', ''),
+(164, 43, '64/3', '1'),
+(165, 43, '56/3', ''),
+(166, 43, '16/3', ''),
+(167, 43, '1/3', ''),
+(168, 44, '415.0', '1'),
+(169, 44, '41.5', ''),
+(170, 44, '4.150', ''),
+(171, 44, '0.415', ''),
+(172, 45, '68,499,769', ''),
+(173, 45, '739,902,874', ''),
+(174, 45, '740,103,134', '1'),
+(175, 45, '740,903,974', '');
 
 -- --------------------------------------------------------
 
@@ -139,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `question` varchar(1000) NOT NULL,
   `image_url` varchar(500) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `questions`
@@ -170,7 +250,27 @@ INSERT INTO `questions` (`id`, `subject_id`, `question`, `image_url`) VALUES
 (22, 1, '"Overcast" in sentence 5 means', ''),
 (23, 1, '"Stormy day" in sentence 7 means.', ''),
 (24, 1, 'When the sky is cloudy the air becomes __________', ''),
-(25, 1, 'What title is best for the paragraph?', '');
+(25, 1, 'What title is best for the paragraph?', ''),
+(26, 2, 'Which of the following pollutes the air?', ''),
+(27, 2, 'Which of the substances will not dissolve in water?', ''),
+(28, 2, 'Mother is preparing some calamansi juice. She squeezed the juice from the calamansi fruits into a glass of water. What should she do after adding sugar to the glass of water to make the sugar dissolve faster?', ''),
+(29, 2, 'Which sentence describes energy?', ''),
+(30, 2, 'A certain food changes in taste while you are chewing it. What does this show?', ''),
+(31, 2, 'Which of the following is not a function of the skeletal system?', ''),
+(32, 2, 'The process of breaking down food into simpler substances is called ________?', ''),
+(33, 2, 'Powdered soap will dissolve faster than a bar soap. Why?', ''),
+(34, 2, 'How does waste in the garbage pollutes the air?', ''),
+(35, 2, 'Which of the following bones protect the brain and the eyeballs?', ''),
+(36, 3, '90,134  Ã· 34  =', ''),
+(37, 3, '8Â³ =', ''),
+(38, 3, '20% if what number is 10.', ''),
+(39, 3, '57.3 x 2.58 =', ''),
+(40, 3, '1 meter is equal to how many centimeters?', ''),
+(41, 3, 'A boy ran a distance of 8.5 kilometer . How many meters did he run?', ''),
+(42, 3, '( 3/4 + 4/5 ) - 1/2 =', ''),
+(43, 3, '24 x 8/9 =', ''),
+(44, 3, '498 Ã· 1.2 =', ''),
+(45, 3, '814,503,219 - 74,600,345 =', '');
 
 -- --------------------------------------------------------
 
@@ -182,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `question_category` (
   `id` int(11) NOT NULL auto_increment,
   `subject_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `description` varchar(1000) NOT NULL,
+  `description` varchar(3000) NOT NULL,
   `image_url` varchar(500) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
@@ -276,14 +376,14 @@ CREATE TABLE IF NOT EXISTS `students` (
   `total_score` float NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `user_id`, `subject_id`, `raw_score`, `total_score`, `date`) VALUES
-(1, 2, 1, 1, 25, '2016-01-11');
+(2, 2, 1, 4, 25, '2016-01-11');
 
 -- --------------------------------------------------------
 
@@ -299,38 +399,17 @@ CREATE TABLE IF NOT EXISTS `student_details` (
   `answer_id` int(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `student_details`
 --
 
 INSERT INTO `student_details` (`id`, `user_id`, `subject_id`, `question_id`, `answer_id`, `date`) VALUES
-(1, 2, 1, 19, 71, '2016-01-11'),
-(2, 2, 1, 24, 61, '2016-01-11'),
-(3, 2, 1, 15, 53, '2016-01-11'),
-(4, 2, 1, 18, 65, '2016-01-11'),
-(5, 2, 1, 23, 0, '2016-01-11'),
-(6, 2, 1, 20, 0, '2016-01-11'),
-(7, 2, 1, 22, 0, '2016-01-11'),
-(8, 2, 1, 21, 0, '2016-01-11'),
-(9, 2, 1, 16, 0, '2016-01-11'),
-(10, 2, 1, 17, 0, '2016-01-11'),
-(11, 2, 1, 10, 0, '2016-01-11'),
-(12, 2, 1, 8, 0, '2016-01-11'),
-(13, 2, 1, 1, 0, '2016-01-11'),
-(14, 2, 1, 12, 0, '2016-01-11'),
-(15, 2, 1, 2, 0, '2016-01-11'),
-(16, 2, 1, 13, 0, '2016-01-11'),
-(17, 2, 1, 4, 0, '2016-01-11'),
-(18, 2, 1, 9, 0, '2016-01-11'),
-(19, 2, 1, 3, 0, '2016-01-11'),
-(20, 2, 1, 7, 0, '2016-01-11'),
-(21, 2, 1, 11, 0, '2016-01-11'),
-(22, 2, 1, 14, 0, '2016-01-11'),
-(23, 2, 1, 5, 0, '2016-01-11'),
-(24, 2, 1, 6, 0, '2016-01-11'),
-(25, 2, 1, 25, 0, '2016-01-11');
+(29, 2, 1, 19, 68, '2016-01-11'),
+(28, 2, 1, 6, 46, '2016-01-11'),
+(27, 2, 1, 25, 91, '2016-01-11'),
+(26, 2, 1, 5, 42, '2016-01-11');
 
 -- --------------------------------------------------------
 
@@ -389,7 +468,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `ULevel` int(11) NOT NULL,
   `status` enum('1','0') NOT NULL default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
@@ -397,4 +476,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `Fname`, `Mname`, `Lname`, `address`, `Cnumber`, `username`, `password`, `ULevel`, `status`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin', '12345', 'admin', 'admin', 5, '1'),
-(2, 'Leo', 'Marapaoc', 'Maristela', 'Cogon Ormoc City', '09482086635', 'student1', '12345', 1, '1');
+(2, 'Leo', 'Marapaoc', 'Maristela', 'Cogon Ormoc City', '09482086635', 'student1', '12345', 1, '1'),
+(3, 'Mitzi Hazel', 'Daffon', 'Tizon', 'Kantalib Ormoc City', '09306234819', 'student2', '12345', 1, '1');
