@@ -8,11 +8,13 @@ if(!isset($_SESSION['login']))
 } 
 
 
+
     if(isset($_POST['submit']))
     {
-        for ($i=1; $i <= count($_POST['answer']); $i++) 
+       
+        for ($i=1; $i <= count($_POST['question']); $i++) 
         { 
-            $result = mysql_query("SELECT * FROM answers WHERE id = '".$_POST['answer'][$i]."'");
+            $result = mysql_query("SELECT * FROM answers WHERE id = '".$_POST['answer'.$i][$i]."'");
             if(mysql_num_rows($result) > 0)
             {
                 while ($row = mysql_fetch_array($result)) 
@@ -20,23 +22,19 @@ if(!isset($_SESSION['login']))
                     if($row['correct'] == 1)
                     {
                          $score = $score + $row['correct'];
-                         mysql_query("INSERT INTO student_details(user_id,subject_id,question_id,answer_id,date) VALUES('".$_SESSION['user_id']."','".$_POST['subject_id']."','".$_POST['question'][$i]."','".$_POST['answer'][$i]."','".date('Y-m-d')."')") or die('Error: '. mysql_error());
-        
                     }
+                    mysql_query("INSERT INTO student_details(user_id,subject_id,question_id,answer_id,date) VALUES('".$_SESSION['user_id']."','".$_POST['subject_id']."','".$_POST['question'][$i]."','".$_POST['answer'.$i][$i]."','".date('Y-m-d')."')") or die('Error: '. mysql_error());
                 }
             }
         }
         
        mysql_query("INSERT INTO students(user_id,subject_id,raw_score,total_score,date) VALUES('".$_SESSION['user_id']."','".$_POST['subject_id']."','".$score."','".$_POST['total']."','".date('Y-m-d')."')") or die('Error: '. mysql_error());
-     /*
-        for ($i=1; $i <= count($_POST['question']); $i++) 
-        { 
-        }
-    */
     }
 
-
+$count = 0;
+$totalscore = 0;
 $button = false;
+
 ?>
 
 <!DOCTYPE html>
@@ -176,20 +174,15 @@ $button = false;
 
                                                                 $totalscore = $totalscore  + $row['raw_score'];
 
-                                                                #count subject
-                                                                $result2 = mysql_query("SELECT * FROM subject");
-                                                                $subjrow = mysql_num_rows($result2);
-
-                                                                $finalscore = $totalscore / $subjrow;
-
-                                                                $result1 = mysql_query("SELECT * FROM sections WHERE min >= '".$finalscore."' AND  max <= '".$finalscore."' ") or die("Error: ". mysql_error());
+                                                                $result1 = mysql_query("SELECT * FROM sections WHERE min >= '".$totalscore."' AND  max <= '".$totalscore."' ") or die("Error: ". mysql_error());
                                                                 $row1 = mysql_fetch_array($result1);
+
                                                             }
 
                                                         ?>
                                                         </tbody>
                                                     </table>
-                                                    <p> Final Score: <?php echo number_format($finalscore,2); ?>% </p>
+                                                    <p> Final Score: <?php echo number_format($totalscore,2); ?>% </p>
                                                     <p> Your Section is: <?php echo $row1['section']; ?> </p>
                                                     <?php
 
@@ -204,7 +197,7 @@ $button = false;
 
                                     <?php
 
-                                        $result = mysql_query("SELECT * FROM subject  WHERE  NOT EXISTS(SELECT * FROM students WHERE id = '".$_SESSION['user_id']."' AND  subject.id = students.subject_id)") or die("Error: ". mysql_error());
+                                        $result = mysql_query("SELECT * FROM subject  WHERE  NOT EXISTS(SELECT * FROM students WHERE user_id = '".$_SESSION['user_id']."' AND  subject.id = students.subject_id)") or die("Error: ". mysql_error());
                                         while ($row = mysql_fetch_array($result)) 
                                         {
 
@@ -253,7 +246,7 @@ $button = false;
                                     </center>
                                 <?php
 
-                                    $result = mysql_query("SELECT * FROM subject WHERE id = '".$_GET['id']."' AND NOT EXISTS(SELECT * FROM students WHERE id = '".$_SESSION['user_id']."' AND subject.id = students.subject_id)") or die("Error: ". mysql_error());
+                                    $result = mysql_query("SELECT * FROM subject WHERE id = '".$_GET['id']."' AND NOT EXISTS(SELECT * FROM students WHERE user_id = '".$_SESSION['user_id']."' AND subject.id = students.subject_id)") or die("Error: ". mysql_error());
                                     if(mysql_num_rows($result) > 0)
                                     {
                                         #with category
@@ -293,18 +286,18 @@ $button = false;
                                                 if (mysql_num_rows($result2) > 0) 
                                                 {
                                                     while ($row2 = mysql_fetch_array($result2)) 
-                                                    { 
-                                                        $count++;
+                                                    {  
                                                         #query for questions               
                                                         $result3 = mysql_query("SELECT * FROM questions WHERE subject_id = '".$_GET['id']."' AND id = '".$row2['question_id']."'");
                                                         if(mysql_num_rows($result3) > 0)
                                                         {
                                                              while ($row3 = mysql_fetch_array($result3)) 
                                                              {
+                                                                $count++;
                                                                 #display questions
-                                            ?>        
-                                                                <input type="hidden" value="<?php echo $row3['id']; ?>" name="question[<?php echo $count; ?>]">
-                                                                    
+                                            ?>                  
+                                                                 <input type="hidden" value="<?php echo $row3['id']; ?>" name="question[<?php echo $count; ?>]">
+
                                                                     <div class="alert alert-info">
                                                                         Qeustion <?php echo $count; ?> of  
                                                                         <?php 
@@ -338,8 +331,6 @@ $button = false;
                                                                     <p style="border-bottom: 2px dashed #cccccc;margin-top: 1px;"></p>
                                                                     <div class="row show-grid">
                                                                         <?php
-
-                                                                            $c = 0;
                                                                             $result4 = mysql_query("SELECT * FROM answers WHERE question_id = '".$row3['id']."' ORDER BY RAND()");
                                                                             while ($row4 = mysql_fetch_array($result4)) 
                                                                             {
@@ -347,7 +338,7 @@ $button = false;
                                                                                 #display answers
                                                                         ?>
                                                                                 <div class="col-xs-6">
-                                                                                    <input type="radio" name="answer[<?php echo $count; ?>]" id="optionsRadiosInline<?php echo $c; ?>" value="<?php echo $row4['id']; ?>" >
+                                                                                    <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
                                                                                     <label><?php echo $row4['text']; ?></label>
                                                                                 </div>
                                                                         <?php
@@ -366,7 +357,7 @@ $button = false;
                                             }
                                         }
                                         #no category
-                                        $result = mysql_query("SELECT * FROM subject WHERE id = '".$_GET['id']."' AND NOT EXISTS(SELECT * FROM students WHERE id = '".$_SESSION['user_id']."' AND subject.id = students.subject_id)") or die("Error: ". mysql_error());
+                                        $result = mysql_query("SELECT * FROM subject WHERE id = '".$_GET['id']."' AND NOT EXISTS(SELECT * FROM students WHERE user_id = '".$_SESSION['user_id']."' AND subject.id = students.subject_id)") or die("Error: ". mysql_error());
                                         if(mysql_num_rows($result) > 0)
                                         {
                                             $result3 = mysql_query("SELECT * FROM questions WHERE subject_id = '".$_GET['id']."' AND NOT EXISTS(SELECT * FROM question_joint WHERE questions.id = question_joint.question_id)  ORDER BY RAND()") or die("Error: ". mysql_error());
@@ -375,23 +366,25 @@ $button = false;
                                                 $button = true;
                                                  while ($row3 = mysql_fetch_array($result3)) 
                                                  {
-                                                      $count++;  
-
+                                                    $count++; 
                                     ?>        
 
+                                                    <input type="hidden" value="<?php echo $row3['id']; ?>" name="question[<?php echo $count; ?>]">
 
                                                         <div class="alert alert-info">
                                                             Question <?php echo $count; ?> of  
                                                            <?php 
 
                                                                 $result37 = mysql_query("SELECT * FROM questions WHERE subject_id = '".$_GET['id']."'");
-                                                                echo  mysql_num_rows($result37); 
+                                                                echo   $totalQuestion = mysql_num_rows($result37); 
                                                             
                                                             ?>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <p ><?php echo $row3['question']; ?></p>
                                                         </div>
+
+                                                        <input type="hidden" name="total" value="<?php echo $totalQuestion; ?>">
                                                      <?php 
 
                                                             if(isset($row3['image_url']) && $row3['image_url'] != "")
@@ -411,16 +404,12 @@ $button = false;
                                                         <p style="border-bottom: 2px dashed #cccccc;margin-top: 1px;"></p>
                                                         <div class="row show-grid">
                                                             <?php
-
-                                                                $c = 0;
                                                                 $result4 = mysql_query("SELECT * FROM answers WHERE question_id = '".$row3['id']."'");
                                                                 while ($row4 = mysql_fetch_array($result4)) 
                                                                 {
-                                                                    $c++;
-
                                                             ?>
                                                                     <div class="col-xs-6">
-                                                                        <input type="radio" name="answer[<?php echo $count; ?>]" id="optionsRadiosInline<?php echo $c; ?>" value="<?php echo $row4['id']; ?>" >
+                                                                        <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
                                                                         <label><?php echo $row4['text']; ?></label>
                                                                     </div>
                                                             <?php

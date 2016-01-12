@@ -12,6 +12,8 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == 'STUDENT')
     header("Location: ../pages/exams.php");
 }
 
+
+
 $result = mysql_query("SELECT * FROM answers") or die("Error: ". mysql_error());
 ?>
 
@@ -47,6 +49,9 @@ $result = mysql_query("SELECT * FROM answers") or die("Error: ". mysql_error());
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -74,7 +79,6 @@ $result = mysql_query("SELECT * FROM answers") or die("Error: ". mysql_error());
 
                 <div class="panel-body">
                    <a href="../forms/answer_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                    <button type="button" class="btn btn-primary">Edit selected</button>
                     <button type="button" class="btn btn-primary">Delete selected</button>
                 </div>
                  <!-- /.row -->
@@ -100,14 +104,17 @@ $result = mysql_query("SELECT * FROM answers") or die("Error: ". mysql_error());
                                         <?php
                                             if(mysql_num_rows($result) > 0)
                                             {
-                                                while ($row = mysql_fetch_array($result)) {
+                                                $i=0;
+                                                while ($row = mysql_fetch_array($result)) 
+                                                {
+                                                    if($i%2==0) $class = 'even'; else $class = 'odd';
                                         ?>
-                                            <tr class="odd gradeX">
-                                                <td><?php echo $row['id']; ?></td>
-                                                <td><?php echo $row['question_id']; ?></td>
-                                                <td><?php echo $row['text']; ?></td>
-                                                <td><?php echo $row['correct']; ?></td>
-                                            </tr>
+                                                    <tr class="odd gradeX <?php echo $class; ?>">
+                                                        <td><?php echo $row['id']; ?></td>
+                                                        <td><?php echo $row['question_id']; ?></td>
+                                                        <td>  <?php echo $row['text']; ?> </td>
+                                                        <td> <?php echo $row['correct']; ?> </td>
+                                                    </tr>
                                         <?php
                                                 }
                                             }
