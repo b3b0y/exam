@@ -11,18 +11,11 @@ if(!isset($_SESSION['login']))
 
     if(isset($_POST['submit']))
     {
-
         $score = 0;  
         for ($i=1; $i <= count($_POST['question']); $i++) 
         { 
             $answers = isset($_POST['answer'.$i][$i]) ? $_POST['answer'.$i][$i] : "";
             $result = mysql_query("SELECT * FROM answers WHERE id = '".$answers."'");
-
-       $score = 0;
-        for ($i=1; $i <= count($_POST['question']); $i++) 
-        { 
-            $answer = mysql_escape_string( $_POST['answer'.$i][$i]);
-            $result = mysql_query("SELECT * FROM answers WHERE id = '".$answer."'");
             if(mysql_num_rows($result) > 0)
             {
                 while ($row = mysql_fetch_array($result)) 
