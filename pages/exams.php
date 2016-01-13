@@ -11,10 +11,11 @@ if(!isset($_SESSION['login']))
 
     if(isset($_POST['submit']))
     {
-       
+        $score = 0;  
         for ($i=1; $i <= count($_POST['question']); $i++) 
         { 
-            $result = mysql_query("SELECT * FROM answers WHERE id = '".$_POST['answer'.$i][$i]."'");
+            $answers = isset($_POST['answer'.$i][$i]) ? $_POST['answer'.$i][$i] : "";
+            $result = mysql_query("SELECT * FROM answers WHERE id = '".$answers."'");
             if(mysql_num_rows($result) > 0)
             {
                 while ($row = mysql_fetch_array($result)) 
@@ -23,7 +24,7 @@ if(!isset($_SESSION['login']))
                     {
                          $score = $score + $row['correct'];
                     }
-                    mysql_query("INSERT INTO student_details(user_id,subject_id,question_id,answer_id,date) VALUES('".$_SESSION['user_id']."','".$_POST['subject_id']."','".$_POST['question'][$i]."','".$_POST['answer'.$i][$i]."','".date('Y-m-d')."')") or die('Error: '. mysql_error());
+                    mysql_query("INSERT INTO student_details(user_id,subject_id,question_id,answer_id,date) VALUES('".$_SESSION['user_id']."','".$_POST['subject_id']."','".$_POST['question'][$i]."','".$answers."','".date('Y-m-d')."')") or die('Error: '. mysql_error());
                 }
             }
         }
