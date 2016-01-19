@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 11, 2016 at 06:55 PM
+-- Generation Time: Jan 19, 2016 at 08:57 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -31,16 +31,16 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `text` varchar(500) NOT NULL,
   `correct` enum('1','0') NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=179 ;
 
 --
 -- Dumping data for table `answers`
 --
 
 INSERT INTO `answers` (`id`, `question_id`, `text`, `correct`) VALUES
-(1, 3, 'hot air', ''),
+(1, 3, 'hot air', '0'),
 (2, 3, 'unclean air', '1'),
-(3, 3, 'cool air', ''),
+(3, 3, 'cool air ', ''),
 (4, 2, 'soil', ''),
 (5, 2, 'water', ''),
 (6, 2, 'air', '1'),
@@ -162,7 +162,7 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `correct`) VALUES
 (125, 34, 'When the garbage decays, it produces foul air.', '1'),
 (126, 34, 'The garbage contains used cans and bottles.', ''),
 (127, 34, 'The garbage is buried', ''),
-(128, 34, 'skull', '1'),
+(178, 35, 'skull', '1'),
 (129, 35, 'Ribs', '0'),
 (130, 35, 'Jawbone', '0'),
 (131, 35, 'collarbone', '0'),
@@ -210,6 +210,50 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `correct`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `intgwa`
+--
+
+CREATE TABLE IF NOT EXISTS `intgwa` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL,
+  `gwa` varchar(500) NOT NULL,
+  `interview` double NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `intgwa`
+--
+
+INSERT INTO `intgwa` (`id`, `user_id`, `gwa`, `interview`, `date`) VALUES
+(3, 2, '89', 18, '2016-01-20 03:18:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `percentage`
+--
+
+CREATE TABLE IF NOT EXISTS `percentage` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(100) NOT NULL,
+  `percent` double NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `percentage`
+--
+
+INSERT INTO `percentage` (`id`, `title`, `percent`) VALUES
+(1, 'Exam', 40),
+(2, 'GWA', 40),
+(3, 'Interview', 20);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `questions`
 --
 
@@ -219,19 +263,19 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `question` varchar(1000) NOT NULL,
   `image_url` varchar(500) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `questions`
 --
 
 INSERT INTO `questions` (`id`, `subject_id`, `question`, `image_url`) VALUES
-(1, 1, 'Factories emit gasses and this combined with smoke and other gases result to "smog".', ''),
+(1, 1, 'Factories emit gasses and this combined with smoke and other gases result to "smog"', ''),
 (2, 1, 'Bird fly as high as the "atmosphere".', ''),
 (3, 1, 'Tress prevent air "pollution".', ''),
 (4, 1, 'Polluted air is "harmful" to man It can cause irritation of the respiratory organs of the body.', ''),
 (5, 1, 'What is the main idea of the paragraph?', ''),
-(6, 1, 'The ideas in the box are', '../question_photo/sample.png'),
+(6, 1, 'The ideas in the box are', ''),
 (7, 1, 'Accumulated smoke in pipes becomes "soot" and is dangerous to our health', ''),
 (8, 1, 'Tuberculosis is a lung "ailment"', ''),
 (9, 1, '"Toxic" food causes stomach ache.', ''),
@@ -286,14 +330,14 @@ CREATE TABLE IF NOT EXISTS `question_category` (
   `image_url` varchar(500) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `question_category`
 --
 
 INSERT INTO `question_category` (`id`, `subject_id`, `name`, `description`, `image_url`) VALUES
-(1, 1, 'Test 1', 'The air we breathe become dirty. Air becomes polluted when impurities  mix with it', ''),
+(1, 1, 'Test 1', 'The air we breathe can become dirty. Air becomes polluted when impurities mix with it. There are several factors that contribute of atmosphere.', ''),
 (2, 1, 'Test 2', 'The philippines is known as the Pearl of the Orient Seas because of its beauty. The land is green throughout the year.', ''),
 (3, 1, 'Test 3', 'When air is heated by the sun, the temperature rises. It is usually warmest during noontime when the sun''s ray hits the earths''s surface directly.', '');
 
@@ -352,15 +396,21 @@ CREATE TABLE IF NOT EXISTS `sections` (
   `min` double NOT NULL,
   `max` double NOT NULL,
   `section` varchar(100) NOT NULL,
+  `limits` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `sections`
 --
 
-INSERT INTO `sections` (`id`, `min`, `max`, `section`) VALUES
-(1, 50, 100, '1st section');
+INSERT INTO `sections` (`id`, `min`, `max`, `section`, `limits`) VALUES
+(1, 90, 100, 'Dignity', 30),
+(2, 80, 90, 'Fedility', 30),
+(3, 70, 80, 'Charity', 30),
+(4, 60, 70, 'Faithful', 30),
+(5, 50, 60, 'Kindness', 30),
+(6, 40, 50, 'Humility', 30);
 
 -- --------------------------------------------------------
 
@@ -376,14 +426,16 @@ CREATE TABLE IF NOT EXISTS `students` (
   `total_score` float NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `user_id`, `subject_id`, `raw_score`, `total_score`, `date`) VALUES
-(2, 2, 1, 4, 25, '2016-01-11');
+(1, 2, 3, 7, 10, '2016-01-13'),
+(2, 2, 1, 2, 26, '2016-01-13'),
+(3, 2, 2, 8, 10, '2016-01-20');
 
 -- --------------------------------------------------------
 
@@ -399,17 +451,54 @@ CREATE TABLE IF NOT EXISTS `student_details` (
   `answer_id` int(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `student_details`
 --
 
 INSERT INTO `student_details` (`id`, `user_id`, `subject_id`, `question_id`, `answer_id`, `date`) VALUES
-(29, 2, 1, 19, 68, '2016-01-11'),
-(28, 2, 1, 6, 46, '2016-01-11'),
-(27, 2, 1, 25, 91, '2016-01-11'),
-(26, 2, 1, 5, 42, '2016-01-11');
+(1, 2, 3, 44, 168, '2016-01-13'),
+(2, 2, 3, 38, 146, '2016-01-13'),
+(3, 2, 3, 41, 158, '2016-01-13'),
+(4, 2, 3, 40, 154, '2016-01-13'),
+(5, 2, 3, 36, 136, '2016-01-13'),
+(6, 2, 3, 37, 142, '2016-01-13'),
+(7, 2, 3, 39, 151, '2016-01-13'),
+(8, 2, 1, 16, 57, '2016-01-13'),
+(9, 2, 1, 20, 73, '2016-01-13'),
+(10, 2, 1, 17, 64, '2016-01-13'),
+(11, 2, 2, 27, 98, '2016-01-20'),
+(12, 2, 2, 32, 117, '2016-01-20'),
+(13, 2, 2, 31, 114, '2016-01-20'),
+(14, 2, 2, 26, 93, '2016-01-20'),
+(15, 2, 2, 28, 101, '2016-01-20'),
+(16, 2, 2, 35, 178, '2016-01-20'),
+(17, 2, 2, 33, 122, '2016-01-20'),
+(18, 2, 2, 34, 125, '2016-01-20'),
+(19, 2, 2, 30, 109, '2016-01-20'),
+(20, 2, 2, 29, 105, '2016-01-20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_section`
+--
+
+CREATE TABLE IF NOT EXISTS `student_section` (
+  `id` int(11) NOT NULL auto_increment,
+  `section_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `GWA` double NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `student_section`
+--
+
+INSERT INTO `student_section` (`id`, `section_id`, `user_id`, `GWA`) VALUES
+(1, 4, 2, 68.71);
 
 -- --------------------------------------------------------
 
@@ -422,7 +511,7 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `name` varchar(50) NOT NULL,
   `description` varchar(500) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `subject`
@@ -476,5 +565,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `Fname`, `Mname`, `Lname`, `address`, `Cnumber`, `username`, `password`, `ULevel`, `status`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin', '12345', 'admin', 'admin', 5, '1'),
-(2, 'Leo', 'Marapaoc', 'Maristela', 'Cogon Ormoc City', '09482086635', 'student1', '12345', 1, '1'),
-(3, 'Mitzi Hazel', 'Daffon', 'Tizon', 'Kantalib Ormoc City', '09306234819', 'student2', '12345', 1, '1');
+(2, 'Leo', 'Marapaoc', 'Maristela', 'Cogon Ormoc City', '09482086635', 'student1', '12345', 1, '1');

@@ -144,8 +144,7 @@ $button = false;
                                             </div>
                                             <div class="panel-body">
                                                 <div class="table-responsive">
-                                                    <?php
-
+                                                 <?php
                                                         $result = mysql_query("SELECT stud.*,sub.name FROM students as stud, subject as sub WHERE stud.user_id = '".$_SESSION['user_id']."' AND stud.subject_id = sub.id") or die("Error: ". mysql_error());
                                                         if(mysql_num_rows($result) > 0)
                                                         {
@@ -161,10 +160,8 @@ $button = false;
                                                         </thead>
                                                         <tbody>
                                                         <?php 
-
                                                             while ($row = mysql_fetch_array($result)) 
                                                             {
-
                                                         ?>
                                                             <tr>
                                                                 <td><?php echo $row['name']; ?></td>
@@ -172,21 +169,59 @@ $button = false;
                                                                 <td><?php echo $row['total_score']; ?></td>
                                                             </tr>
                                                         <?php
-
-                                                                $totalscore = $totalscore  + $row['raw_score'];
-
-                                                                $result1 = mysql_query("SELECT * FROM sections WHERE min >= '".$totalscore."' AND  max <= '".$totalscore."' ") or die("Error: ". mysql_error());
-                                                                $row1 = mysql_fetch_array($result1);
-
+                                                                 $raw_score = $raw_score  + $row['raw_score'];
                                                             }
-
                                                         ?>
                                                         </tbody>
                                                     </table>
-                                                    <p> Final Score: <?php echo number_format($totalscore,2); ?>% </p>
-                                                    <p> Your Section is: <?php echo $row1['section']; ?> </p>
                                                     <?php
+                                                            $result1 = mysql_query("SELECT * FROM intgwa  WHERE user_id = '".$_SESSION['user_id']."'") or die("Error: ". mysql_error());
+                                                            $row1 = mysql_fetch_array($result1);
 
+                                                            $result2 = mysql_query("SELECT * FROM questions") or die("Error: ". mysql_error());
+
+                                                            $totalquest = mysql_num_rows($result2);
+                                                            $gwa = $row1['gwa'];
+                                                            $inter = $row1['interview'];
+
+                                                            $result3 = mysql_query("SELECT * FROM percentage") or die("Error: ". mysql_error());
+                                                            while ($row3 = mysql_fetch_array($result3)) {
+                                                                $array[] = $row3['percent'];
+                                                            }
+                                                            $exampercnt = $array[0] / 100;
+                                                            $gwapercnt = $array[1] / 100;
+                                                            $intepercnt = $array[2] / 100;
+
+                                                            $totalexam = ((($raw_score / $totalquest) * 100) * $exampercnt); 
+                                                            $totalgwa = ((($gwa / 100) * 100) * $gwapercnt); 
+                                                            $totalinter = ((($inter / 20) * 100) * $intepercnt);
+
+                                                        ?>
+                                                                                                                        <p > Exam:<b> <?php echo $raw_score.' / ' .$totalquest; ?> </b></p>
+                                                            <p > GWA: <b> <?php echo $gwa ?> / 100 </b></p>
+                                                            <p > Interview:<b> <?php echo $inter ?> / 20 </b></p>
+
+                                                        <?php
+
+                                                             $result = mysql_query("SELECT * FROM subject  WHERE  NOT EXISTS(SELECT * FROM students WHERE user_id = '".$_SESSION['user_id']."' AND  subject.id = students.subject_id)") or die("Error: ". mysql_error());
+                                                            if(mysql_num_rows($result) == 0)
+                                                            {
+                                                                $totalscore = $totalexam + $totalgwa + $totalinter ;
+                                                            
+                                                                $result4 = mysql_query("SELECT * FROM sections WHERE  '".$totalscore."'  >= min AND '".$totalscore."' <= max  ") or die("Error: ". mysql_error());
+                                                                $row4 = mysql_fetch_array($result4);
+
+                                                                $result5 = mysql_query("SELECT * FROM student_section WHERE user_id = '".$_SESSION['user_id']."'");
+                                                                if(mysql_num_rows($result5) == 0)
+                                                                {
+                                                                    mysql_query("INSERT INTO student_section(section_id,user_id,GWA) VALUES('".$row4['id']."','".$_SESSION['user_id']."','".number_format($totalscore,2)."')");
+                                                                    echo "string";
+                                                                }
+                                                    ?>  
+                                                            <p> Final Average:<b> <?php echo number_format($totalscore,2); ?>% </b></p>
+                                                            <p> Your Section is:<b> <?php echo $row4['section']; ?> </b></p>
+                                                    <?php 
+                                                            }
                                                         }
 
                                                     ?>
@@ -199,18 +234,20 @@ $button = false;
                                     <?php
 
                                         $result = mysql_query("SELECT * FROM subject  WHERE  NOT EXISTS(SELECT * FROM students WHERE user_id = '".$_SESSION['user_id']."' AND  subject.id = students.subject_id)") or die("Error: ". mysql_error());
-                                        while ($row = mysql_fetch_array($result)) 
+                                        if(mysql_num_rows($result) > 0)
                                         {
+                                            while ($row = mysql_fetch_array($result)) 
+                                            {
 
-                                    ?>
-                                         <div class="col-md-4">
-                                            <a href="?id=<?php echo $row['id'] ?>"> <button type="button" class="btn btn-primary btn-lg btn-block"><?php echo $row['name'] ?> </button></a>
-                                         </div>
-                                    <?php 
+                                        ?>
+                                             <div class="col-md-4">
+                                                <a href="?id=<?php echo $row['id'] ?>"> <button type="button" class="btn btn-primary btn-lg btn-block"><?php echo $row['name'] ?> </button></a>
+                                             </div>
+                                        <?php 
 
+                                            }
                                         }
-
-                                     ?>
+                                         ?>
                                     </div>
                                 </div>
                             </div>

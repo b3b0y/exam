@@ -87,8 +87,7 @@ $result = mysql_query("SELECT stud.*,subj.*,users.* FROM students as stud , subj
                                                 <th>id</th>
                                                 <th>Student Name</th>
                                                 <th>Subject</th>
-                                                <th>Raw Score</th>
-                                                <th>Number of items</th>
+                                                <th>Score</th>
                                                 <th>Date</th>
                                             </tr>
                                         </thead>
@@ -103,7 +102,6 @@ $result = mysql_query("SELECT stud.*,subj.*,users.* FROM students as stud , subj
                                                  <td><?php echo $row['Lname'] .', '.  $row['Fname'] .' '. $row['Mname']; ?></td>
                                                 <td><?php echo $row['name']; ?></td>
                                                 <td><?php echo $row['raw_score']; ?></td>
-                                                <td><?php echo $row['total_score']; ?></td>
                                                 <td><?php echo $row['date']; ?></td>
                                             </tr>
                                         <?php

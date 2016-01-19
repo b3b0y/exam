@@ -5,20 +5,14 @@ require_once('../php/config.php');
 if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 {
 
-    mysql_query("INSERT INTO users(Fname,Mname,Lname,address,Cnumber,username,password,ULevel,status) VALUES('".$_POST['fname']."','".$_POST['mname']."','".$_POST['lname']."','".$_POST['address']."','".$_POST['cnum']."','".$_POST['uname']."','".$_POST['pass']."','".$_POST['ulvl']."','1')") or die('Error: '. mysql_error());
-
-    echo "<script> alert('Successfully saved'); window.location.href='../pages/users.php' </script>";
+        mysql_query("UPDATE intgwa SET gwa = '".$_POST['gwa']."' , interview = '".$_POST['int']."' WHERE id = '".$_POST['id']."'") or die('Error: '. mysql_error());
+        echo "<script> alert('Successfully Updated'); window.location.href='../pages/interview.php' </script>";
+ 
 }
 
-if($_GET['user'] == 5)
-{
-    $message = 'Faculty';
-}
-else
-{
-    $message = "Student";
-}
 
+$result = mysql_query("SELECT  * FROM intgwa WHERE id ='".$_GET['intgwa']."' ") or die("Error: ". mysql_error());
+$row1 = mysql_fetch_array($result);
 ?>
 
 
@@ -68,7 +62,7 @@ else
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><?php echo $message; ?></h1>
+                        <h1 class="page-header">Add Interview and GWA</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -77,44 +71,35 @@ else
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                              Sign-up
+                             Score
                             </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form method="post" action="signup_form.php" role="form">
-                                            <input name="ulvl" type="hidden" value="<?php echo $_GET['user'] ?>">
+                                        <form method="post" action="edit_interview_form.php" role="form">
+                                            <input type="hidden" name="id" value="<?php echo $_GET['intgwa']; ?>">
                                             <div class="form-group">
-                                                <label>First name:</label>
-                                                <input name="fname" type="text" class="form-control" placeholder="First name" required>
+                                           
+                                           <?php 
+                                                $result = mysql_query("SELECT * FROM users WHERE id = '".$row1['user_id']."'") or die('Error: '. mysql_error());
+                                                 $row = mysql_fetch_array($result) 
+                                            ?>
+                                            <label>
+                                                <?php echo $row['Fname']." ". $row['Mname']." ". $row['Lname']; ?>
+                                            </label>
+                                               
+                                        </div>
+                                            <div class="form-group">
+                                                <label>General weighted average (0 - 100): </label>
+                                                <input name="gwa" type="text" class="form-control" placeholder="General weighted average" value="<?php echo $row1['gwa']; ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Middle name:</label>
-                                                <input name="mname" type="text" class="form-control" placeholder="Middle name" required>
+                                                <label>Interview (0 - 20):</label>
+                                                <input name="int" type="text" class="form-control" placeholder="Interview" value="<?php echo $row1['interview']; ?>" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label>last name:</label>
-                                               <input name="lname" type="text" class="form-control" placeholder="Last name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Address:</label>
-                                                <input name="address" type="text" class="form-control" placeholder="Address" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Contact number:</label>
-                                                <input name="cnum" type="text" class="form-control" placeholder="Contact number" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>User name:</label>
-                                                <input name="uname" type="text" class="form-control" placeholder="Username" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Password:</label>
-                                                <input name="pass" type="password" class="form-control" placeholder="Password"  required>
-                                            </div>
-
+                                        
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">
-                                            <a class="btn btn-primary" href="../pages/users.php">Back </a>
+                                            <a class="btn btn-primary" href="../pages/interview.php">Back </a>
                                         </form>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->

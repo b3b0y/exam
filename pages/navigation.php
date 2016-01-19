@@ -55,11 +55,17 @@
                          <li>
                             <a href="../pages/answers.php"><i class="fa fa-fw"></i> Answers</a>
                         </li>
+                         <li>
+                            <a href="../pages/sections.php"><i class="fa  fa-fw"></i> Sections</a>
+                        </li>
                         <li>
                             <a href="#"><i class="fa  fa-fw"></i> Student Records <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                     <a href="../pages/students.php">Students Score</a>
+                                     <a href="../pages/interview.php">GWA / Interview</a>
+                                </li>
+                                <li>
+                                     <a href="../pages/students.php">Student Exam Score</a>
                                 </li>
                                 <li>
                                     <a href="../pages/students_details.php">Students Answer Details</a>
@@ -71,13 +77,18 @@
                             <!-- /.nav-second-level -->
                         </li>
                          <li>
-                            <a href="../pages/users.php"><i class="fa fa-fw"></i> Users</a>
-                        </li>
-                        <li>
-                            <a href="../pages/sections.php"><i class="fa  fa-fw"></i> Sections</a>
+                            <a href="../pages/percentage.php"><i class="fa  fa-fw"></i> Percentage Settings</a>
                         </li>
                          <li>
-                            <a href="../pages/percentage.php"><i class="fa  fa-fw"></i> Percentage Settings</a>
+                            <a href="#"><i class="fa fa-fw"></i> Accounts settings <span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level">
+                                <li>
+                                     <a href="../pages/users.php?user=5">Admin</a>
+                                </li>
+                                <li>
+                                    <a href="../pages/users.php?user=1">Student</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

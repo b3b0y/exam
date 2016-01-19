@@ -64,4 +64,12 @@ if(isset($_GET['subj']) && $_GET['subj'] != "")
 	echo "<script> alert('Successfully Deleted'); window.location.href='../pages/subjects.php' </script>";
 }
 
+if(isset($_GET['intgwa']) && $_GET['intgwa'] != "")
+{
+
+	mysql_query("DELETE FROM intgwa WHERE id = '".$_GET['intgwa']."'");
+
+	echo "<script> alert('Successfully Deleted'); window.location.href='../pages/interview.php' </script>";
+}
+
 ?>
