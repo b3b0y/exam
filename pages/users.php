@@ -30,7 +30,7 @@ $result = mysql_query("SELECT * FROM users");
 
     <title>Dolores National Highschool Entrance Exam</title>
 
-    <!-- Bootstrap Core CSS -->
+     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
@@ -48,6 +48,8 @@ $result = mysql_query("SELECT * FROM users");
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -75,8 +77,6 @@ $result = mysql_query("SELECT * FROM users");
 
                 <div class="panel-body">
                    <a href="../forms/signup_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                    <button type="button" class="btn btn-primary">Edit selected</button>
-                    <button type="button" class="btn btn-primary">Delete selected</button>
                 </div>
                  <!-- /.row -->
                 <div class="row">
@@ -99,15 +99,19 @@ $result = mysql_query("SELECT * FROM users");
                                                 <th>Password</th>
                                                 <th>User level</th>
                                                 <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php
                                             if(mysql_num_rows($result) > 0)
                                             {
-                                                while ($row = mysql_fetch_array($result)) {
+                                                $i=0;
+                                                while ($row = mysql_fetch_array($result)) 
+                                                {
+                                                     if($i%2==0) $class = 'even'; else $class = 'odd';
                                         ?>
-                                            <tr class="odd gradeX">
+                                            <tr class="odd gradeX <?php echo $class; ?>">
                                                 <td><?php echo $row['id']; ?></td>
                                                 <td><?php echo $row['Lname'] .', '.  $row['Fname'] .' '. $row['Mname']; ?></td>
                                                 <td><?php echo $row['address']; ?></td>
@@ -116,6 +120,7 @@ $result = mysql_query("SELECT * FROM users");
                                                 <td><?php echo $row['password']; ?></td>
                                                 <td><?php echo $row['ULevel']; ?></td>
                                                 <td><?php echo $row['status']; ?></td>
+                                                <td><a href="../forms/edit_user_form.php?user=<?php echo $row['id']; ?>"><button  class="fa fa-edit"></button></a> <a onclick="return confirm('Are you sure you want to delete?');" href="../php/delete.php?user=<?php echo $row['id']; ?>"><button  class=" fa fa-trash-o"></button></a></td>
                                             </tr>
                                         <?php
                                                 }

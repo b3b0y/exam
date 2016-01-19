@@ -1,23 +1,19 @@
 <?php session_start();
-
 require_once('../php/config.php');
 
 if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 {
-    $result = mysql_query("SELECT * FROM subject WHERE name = '".$_POST['name']."'");
-    if(mysql_num_rows($result) > 0)
-    {
-        echo "<script> alert('".$_POST['name']." is already used'); window.location.href='subjects_form.php' </script>";
-    }
-    else
-    {
-        mysql_query("INSERT INTO subject(name,description) VALUES('".$_POST['name']."','".$_POST['descrip']."')") or die('Error: '. mysql_error());
-        echo "<script> alert('Successfully saved'); window.location.href='../pages/subjects.php' </script>";
-    } 
+    mysql_query("UPDATE answers SET text = '".$_POST['text']."', correct = '".$_POST['correct']."' WHERE id = '".$_POST['id']."'") or die('Error: '. mysql_error());      
+    
+    echo "<script> alert('Successfully Updated'); window.location.href='../pages/answers.php' </script>";
 }
 
 
 
+
+
+$result = mysql_query("SELECT * FROM answers WHERE id = '".$_GET['answer']."'") or die("Error: ". mysql_error());
+$row = mysql_fetch_array($result);
 ?>
 
 
@@ -67,33 +63,40 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">New Subject</h1>
+                        <h1 class="page-header">New answer</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.row -->
+                    <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                              Subject
+                              Answer
                             </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form method="post" action="subjects_form.php" role="form">
-                                            <div class="form-group">
-                                                <label>Name:</label>
-                                                <input name="name" type="text" class="form-control" placeholder="Subject Name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Description:</label>
-                                                <input name="descrip" type="text" class="form-control" placeholder="Description">
-                                            </div>
+                                       
                                         
+                                        <form method="post" action="edit_answer_form.php" role="form">
+                                            <input type="hidden" name="id" value="<?php echo $_GET['answer']; ?>">
+                                            <div class="form-group">
+                                                <label>Answer </label>
+                                                <input name="text" type="text" class="form-control" placeholder="text" value="<?php echo $row['text']; ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="correct" type="checkbox" value="1" <?php echo $row['correct'] == 1 ? 'checked' : ''; ?>> Select if Correct 
+                                                    </label>
+                                                </div>
+                                            </div>
+
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">
-                                            <a class="btn btn-primary" href="../pages/subjects.php">Back </a>
+                                            <a class="btn btn-primary" href="../pages/answers.php">Back </a>
                                         </form>
+
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>

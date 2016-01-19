@@ -138,7 +138,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                                                         while ($row = mysql_fetch_array($result)) 
                                                         {
                                                     ?>
-                                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['question']; ?></option>
+                                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['question']; ?></option>
                                                     <?php
                                                         }
                                                     ?>

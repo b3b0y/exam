@@ -47,7 +47,7 @@
                                     <a href="../pages/questions_category.php">Question Category</a>
                                 </li>
                                 <li>
-                                    <a href="../pages/questions_joint.php">Question Joint</a>
+                                    <a href="../pages/questions_joint.php">Question Categorize</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -62,10 +62,10 @@
                                      <a href="../pages/students.php">Students Score</a>
                                 </li>
                                 <li>
-                                    <a href="../pages/students_details.php">Students Details</a>
+                                    <a href="../pages/students_details.php">Students Answer Details</a>
                                 </li>
                                  <li>
-                                    <a href="../pages/students.php">Students Ranking</a>
+                                    <a href="../pages/students.php">Students Section</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -75,6 +75,9 @@
                         </li>
                         <li>
                             <a href="../pages/sections.php"><i class="fa  fa-fw"></i> Sections</a>
+                        </li>
+                         <li>
+                            <a href="../pages/percentage.php"><i class="fa  fa-fw"></i> Percentage Settings</a>
                         </li>
                     </ul>
                 </div>

@@ -4,20 +4,15 @@ require_once('../php/config.php');
 
 if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 {
-    $result = mysql_query("SELECT * FROM subject WHERE name = '".$_POST['name']."'");
-    if(mysql_num_rows($result) > 0)
-    {
-        echo "<script> alert('".$_POST['name']." is already used'); window.location.href='subjects_form.php' </script>";
-    }
-    else
-    {
-        mysql_query("INSERT INTO subject(name,description) VALUES('".$_POST['name']."','".$_POST['descrip']."')") or die('Error: '. mysql_error());
-        echo "<script> alert('Successfully saved'); window.location.href='../pages/subjects.php' </script>";
-    } 
+
+    mysql_query("UPDATE subject SET name = '".$_POST['name']."' ,description = '".$_POST['descrip']."' WHERE id ='".$_POST['id']."'") or die('Error: '. mysql_error());
+
+    echo "<script> alert('Successfully saved'); window.location.href='../pages/subjects.php' </script>";
 }
 
 
-
+$result = mysql_query("SELECT * FROM subject WHERE id = '".$_GET['subj']."'") or die("Error: ". mysql_error());
+$row = mysql_fetch_array($result);
 ?>
 
 
@@ -81,14 +76,15 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form method="post" action="subjects_form.php" role="form">
+                                        <form method="post" action="edit_subjects_form.php" role="form">
+                                            <input type="hidden" name="id" value="<?php echo $_GET['subj']; ?>">
                                             <div class="form-group">
                                                 <label>Name:</label>
-                                                <input name="name" type="text" class="form-control" placeholder="Subject Name" required>
+                                                <input name="name" type="text" class="form-control" placeholder="Subject Name" value="<?php echo $row['name']; ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Description:</label>
-                                                <input name="descrip" type="text" class="form-control" placeholder="Description">
+                                                <input name="descrip" type="text" class="form-control" placeholder="Description" value="<?php echo $row['description']; ?>" >
                                             </div>
                                         
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">

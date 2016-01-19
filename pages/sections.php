@@ -8,10 +8,12 @@ if(!isset($_SESSION['login']))
 } 
 
 
+
 if(isset($_SESSION['login']) && $_SESSION['login'] == 'STUDENT') 
 {
     header("Location: ../pages/exams.php");
 }
+
 $result = mysql_query("SELECT * FROM sections") or die("Error: ". mysql_error());
 ?>
 
@@ -74,8 +76,6 @@ $result = mysql_query("SELECT * FROM sections") or die("Error: ". mysql_error())
 
                 <div class="panel-body">
                    <a href="../forms/section_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                    <button type="button" class="btn btn-primary">Edit selected</button>
-                    <button type="button" class="btn btn-primary">Delete selected</button>
                 </div>
                  <!-- /.row -->
                 <div class="row">
@@ -91,9 +91,11 @@ $result = mysql_query("SELECT * FROM sections") or die("Error: ". mysql_error())
                                         <thead>
                                             <tr>
                                                 <th>id</th>
+                                                <th>Section</th>
                                                 <th>Minimum Average</th>
                                                 <th>Maximum Average</th>
-                                                <th>Section</th>
+                                               <!-- <th>Limit</th> -->
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -104,9 +106,11 @@ $result = mysql_query("SELECT * FROM sections") or die("Error: ". mysql_error())
                                         ?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $row['id']; ?></td>
-                                                <td><?php echo $row['min']; ?></td>
-                                                <td><?php echo $row['max']; ?></td>
                                                 <td><?php echo $row['section']; ?></td>
+                                                <td><?php echo $row['min']; ?>%</td>
+                                                <td><?php echo $row['max']; ?>%</td>
+                                                <!-- <td><?php echo $row['limits']; ?></td> -->
+                                                <td><a href="../forms/edit_section_form.php?section=<?php echo $row['id']; ?>"><button  class="fa fa-edit"></button></a> <a onclick="return confirm('Are you sure you want to delete?');" href="../php/delete.php?section=<?php echo $row['id']; ?>"><button  class=" fa fa-trash-o"></button></a></td>
                                             </tr>
                                         <?php
                                                 }

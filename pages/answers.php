@@ -79,8 +79,8 @@ $result = mysql_query("SELECT * FROM answers") or die("Error: ". mysql_error());
 
                 <div class="panel-body">
                    <a href="../forms/answer_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                    <button type="button" class="btn btn-primary">Delete selected</button>
                 </div>
+                
                  <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-20">
@@ -98,6 +98,7 @@ $result = mysql_query("SELECT * FROM answers") or die("Error: ". mysql_error());
                                                 <th>Question id</th>
                                                 <th>Text</th>
                                                 <th>Correct</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -114,6 +115,7 @@ $result = mysql_query("SELECT * FROM answers") or die("Error: ". mysql_error());
                                                         <td><?php echo $row['question_id']; ?></td>
                                                         <td>  <?php echo $row['text']; ?> </td>
                                                         <td> <?php echo $row['correct']; ?> </td>
+                                                        <td><a href="../forms/edit_answer_form.php?answer=<?php echo $row['id']; ?>"><button  class="fa fa-edit"></button></a> <a onclick="return confirm('Are you sure you want to delete?');" href="../php/delete.php?answer=<?php echo $row['id']; ?>"><button  class=" fa fa-trash-o"></button></a></td>
                                                     </tr>
                                         <?php
                                                 }

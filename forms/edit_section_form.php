@@ -4,19 +4,12 @@ require_once('../php/config.php');
 
 if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 {
-    $result = mysql_query("SELECT * FROM subject WHERE name = '".$_POST['name']."'");
-    if(mysql_num_rows($result) > 0)
-    {
-        echo "<script> alert('".$_POST['name']." is already used'); window.location.href='subjects_form.php' </script>";
-    }
-    else
-    {
-        mysql_query("INSERT INTO subject(name,description) VALUES('".$_POST['name']."','".$_POST['descrip']."')") or die('Error: '. mysql_error());
-        echo "<script> alert('Successfully saved'); window.location.href='../pages/subjects.php' </script>";
-    } 
+	mysql_query("UPDATE sections SET min = '".$_POST['min']."' , max = '".$_POST['max']."' , section = '".$_POST['section']."' , limits = '".$_POST['limits']."' WHERE id = '".$_POST['id']."'");
+   echo "<script> alert('Successfully Updated'); window.location.href='../pages/sections.php' </script>";
 }
 
-
+$result = mysql_query("SELECT * FROM sections WHERE id = '".$_GET['section']."'");
+$row = mysql_fetch_array($result);
 
 ?>
 
@@ -67,32 +60,43 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">New Subject</h1>
+                        <h1 class="page-header">Edit section</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.row -->
+                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                              Subject
+                              section
                             </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form method="post" action="subjects_form.php" role="form">
-                                            <div class="form-group">
-                                                <label>Name:</label>
-                                                <input name="name" type="text" class="form-control" placeholder="Subject Name" required>
+                                        <form method="post" action="edit_section_form.php" role="form">
+                                        	<input type="hidden" name="id" value="<?php echo $_GET['section']; ?>">
+                                             <div class="form-group">
+                                                <label>Minimum Average</label>
+                                                <input name="min" type="text" class="form-control" placeholder="Minimum Average" value="<?php echo $row['min']; ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Description:</label>
-                                                <input name="descrip" type="text" class="form-control" placeholder="Description">
+                                                <label>Maximum Average:</label>
+                                                <input name="max" type="text" class="form-control" placeholder="Maximum Average" value="<?php echo $row['max']; ?>" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Section:</label>
+                                                <input name="section" type="text" class="form-control" placeholder="Section" value="<?php echo $row['section']; ?>" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Limits:</label>
+                                                <input name="limits" type="text" class="form-control" placeholder="Limits" value="<?php echo $row['limits']; ?>" required>
                                             </div>
                                         
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">
-                                            <a class="btn btn-primary" href="../pages/subjects.php">Back </a>
+                                            <a class="btn btn-primary" href="../pages/sections.php">Back </a>
                                         </form>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->

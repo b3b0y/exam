@@ -75,8 +75,6 @@ $result = mysql_query("SELECT * FROM subject") or die("Error: ". mysql_error());
 
                 <div class="panel-body">
                    <a href="../forms/subjects_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                    <button type="button" class="btn btn-primary">Edit selected</button>
-                    <button type="button" class="btn btn-primary">Delete selected</button>
                 </div>
                  <!-- /.row -->
                 <div class="row">
@@ -94,6 +92,7 @@ $result = mysql_query("SELECT * FROM subject") or die("Error: ". mysql_error());
                                                 <th>id</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -106,6 +105,7 @@ $result = mysql_query("SELECT * FROM subject") or die("Error: ". mysql_error());
                                                 <td><?php echo $row['id']; ?></td>
                                                 <td><?php echo $row['name']; ?></td>
                                                 <td><?php echo $row['description']; ?></td>
+                                                <td><a href="../forms/edit_subjects_form.php?subj=<?php echo $row['id']; ?>"><button  class="fa fa-edit"></button></a> <a onclick="return confirm('Are you sure you want to delete?');" href="../php/delete.php?subj=<?php echo $row['id']; ?>"><button  class=" fa fa-trash-o"></button></a></td>
                                             </tr>
                                         <?php
                                                 }

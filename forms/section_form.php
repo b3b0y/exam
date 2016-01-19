@@ -5,7 +5,7 @@ require_once('../php/config.php');
 if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 {
 
-    mysql_query("INSERT INTO sections(min,max,section) VALUES('".$_POST['min']."','".$_POST['max']."','".$_POST['section']."')") or die('Error: '. mysql_error());
+    mysql_query("INSERT INTO sections(min,max,section,limits) VALUES('".$_POST['min']."','".$_POST['max']."','".$_POST['section']."','".$_POST['limits']."')") or die('Error: '. mysql_error());
 
    echo "<script> alert('Successfully saved'); window.location.href='../pages/sections.php' </script>";
 }
@@ -61,7 +61,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">New answer</h1>
+                        <h1 class="page-header">New Section</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -70,7 +70,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                              Answer
+                              Section
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -88,6 +88,11 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                                             <div class="form-group">
                                                 <label>Section:</label>
                                                 <input name="section" type="text" class="form-control" placeholder="Section" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Limits:</label>
+                                                <input name="limits" type="text" class="form-control" placeholder="Limits" required>
                                             </div>
                                         
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">

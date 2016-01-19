@@ -13,7 +13,12 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == 'STUDENT')
     header("Location: ../pages/exams.php");
 }
 
-$result = mysql_query("SELECT q.question,qj.*,qc.name FROM questions as q, question_joint as qj , question_category as qc WHERE q.id = qj.question_id AND qj.quest_cat_id = qc.id") or die("Error: ". mysql_error());
+
+if(isset($_POST['submit']))
+{
+    mysql_query("UPDATE percentage SET percent = '".$_POST['percent']."' WHERE id = '".$_POST['id']."'");
+}
+$result = mysql_query("SELECT * FROM percentage") or die("Error: ". mysql_error());
 ?>
 
 
@@ -68,31 +73,57 @@ $result = mysql_query("SELECT q.question,qj.*,qc.name FROM questions as q, quest
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Questions Categorize</h1>
+                        <h1 class="page-header">Percentage Settings</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
 
-                <div class="panel-body">
-                   <a href="../forms/question_joint_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                </div>
+               
                  <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-20">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Question List
+                                Percentage list
                             </div>
+                            <?php
+                                if(isset($_GET['id']))
+                                {
+                                    $result = mysql_query("SELECT * FROM percentage WHERE id = '".$_GET['id']."'");
+                                    $row = mysql_fetch_array($result);
+                            ?>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <form method="post" action="percentage.php" role="form">
+                                            <h2><?php echo$row['title']; ?></h2>
+                                             <div class="form-group">
+                                                <label>Percent (%)</label>
+                                                <input name="percent"  type="text" class="form-control" placeholder="percentage" value="<?php echo $row['percent']; ?>" required>
+                                                <input type="hidden" value="<?php echo $row['id']; ?>" name='id'>
+                                            </div>
+                                            <input type="submit" name="submit" value="Save" class="btn btn-primary">
+                                            <a class="btn btn-primary" href="percentage.php">Back </a>
+                                        </form>
+                                    </div>
+                                    <!-- /.col-lg-6 (nested) -->
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <?php
+                                }
+                                else
+                                {
+                             ?>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>id</th>
-                                                <th>Category Name</th>
-                                                <th>Question ID</th>
-                                                <th>Action</th>
+                                                <th>Title</th>
+                                                <th>Percent</th>
+                                                 <th>action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -102,10 +133,9 @@ $result = mysql_query("SELECT q.question,qj.*,qc.name FROM questions as q, quest
                                                 while ($row = mysql_fetch_array($result)) {
                                         ?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $row['id']; ?></td>
-                                                <td><?php echo $row['name']; ?></td>
-                                                <td><?php echo $row['question']; ?></td>
-                                                <td> <a onclick="return confirm('Are you sure you want to delete?');" href="../php/delete.php?questjoin=<?php echo $row['id']; ?>"><button  class=" fa fa-trash-o"></button></a></td>
+                                                <td><?php echo $row['title']; ?></td>
+                                                <td><?php echo $row['percent']; ?>%</td>
+                                                <td><a href="percentage.php?id=<?php echo $row['id']; ?>"><button class="btn  btn-lg fa fa-edit"></button></a></td>
                                             </tr>
                                         <?php
                                                 }
@@ -116,6 +146,9 @@ $result = mysql_query("SELECT q.question,qj.*,qc.name FROM questions as q, quest
                                 </div>
                             </div>
                             <!-- /.panel-body -->
+                            <?php                                  
+                                }
+                            ?>
                         </div>
                         <!-- /.panel -->
                     </div>
@@ -128,7 +161,6 @@ $result = mysql_query("SELECT q.question,qj.*,qc.name FROM questions as q, quest
         <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
 
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>

@@ -75,8 +75,6 @@ $result = mysql_query("SELECT * FROM question_category") or die("Error: ". mysql
 
                 <div class="panel-body">
                    <a href="../forms/question_category_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                    <button type="button" class="btn btn-primary">Edit selected</button>
-                    <button type="button" class="btn btn-primary">Delete selected</button>
                 </div>
                  <!-- /.row -->
                 <div class="row">
@@ -92,22 +90,29 @@ $result = mysql_query("SELECT * FROM question_category") or die("Error: ". mysql
                                         <thead>
                                             <tr>
                                                 <th>id</th>
+                                                <th>Subject</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
                                                 <th>Image</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php
                                             if(mysql_num_rows($result) > 0)
                                             {
-                                                while ($row = mysql_fetch_array($result)) {
+                                                while ($row = mysql_fetch_array($result)) 
+                                                {
+                                                    $result1 = mysql_query("SELECT * FROM subject WHERE id = '".$row['subject_id']."'");
+                                                    $row1 = mysql_fetch_array($result1);
                                         ?>
                                             <tr class="odd gradeX">
                                                 <td><?php echo $row['id']; ?></td>
+                                                <td><?php echo $row1['name']; ?></td>
                                                 <td><?php echo $row['name']; ?></td>
                                                 <td><?php echo $row['description']; ?></td>
                                                 <td><img src="<?php echo $row['image_url']; ?>" width="100px" height="100px"> </td>
+                                                <td><a href="../forms/edit_question_category_form.php?questcat=<?php echo $row['id']; ?>"><button  class="fa fa-edit"></button></a> <a onclick="return confirm('Are you sure you want to delete?');" href="../php/delete.php?questcat=<?php echo $row['id']; ?>"><button  class=" fa fa-trash-o"></button></a></td>
                                             </tr>
                                         <?php
                                                 }

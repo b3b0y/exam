@@ -22,9 +22,8 @@ $row = mysql_fetch_array($qry);
 if ($num==0 || $pass!=$row['password']) //check if the pass is in the database
 {
 	//failed to login
-	$_SESSION['Fail'] = 1;
-	
-	header("Location: ../index.html");
+			echo "<script> alert('Username or Password Incorrect'); 
+					window.location.assign('../index.html') </script>";
 } 
 else 
 {

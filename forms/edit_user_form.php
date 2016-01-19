@@ -4,19 +4,14 @@ require_once('../php/config.php');
 
 if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 {
-    $result = mysql_query("SELECT * FROM subject WHERE name = '".$_POST['name']."'");
-    if(mysql_num_rows($result) > 0)
-    {
-        echo "<script> alert('".$_POST['name']." is already used'); window.location.href='subjects_form.php' </script>";
-    }
-    else
-    {
-        mysql_query("INSERT INTO subject(name,description) VALUES('".$_POST['name']."','".$_POST['descrip']."')") or die('Error: '. mysql_error());
-        echo "<script> alert('Successfully saved'); window.location.href='../pages/subjects.php' </script>";
-    } 
+
+    mysql_query("UPDATE users SET Fname = '".$_POST['fname']."',Mname = '".$_POST['mname']."' ,Lname = '".$_POST['lname']."',address= '".$_POST['address']."',Cnumber= '".$_POST['cnum']."',username= '".$_POST['uname']."',password= '".$_POST['pass']."' WHERE id = '".$_POST['id']."' ") or die('Error: '. mysql_error());
+
+    echo "<script> alert('Successfully Update'); window.location.href='../pages/users.php' </script>";
 }
 
-
+$result = mysql_query("SELECT * FROM users WHERE id ='".$_GET['user']."'");
+$row = mysql_fetch_array($result);
 
 ?>
 
@@ -67,7 +62,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">New Subject</h1>
+                        <h1 class="page-header">Update user</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -76,23 +71,44 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                              Subject
+                              Sign-up
                             </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form method="post" action="subjects_form.php" role="form">
+                                        <form method="post" action="signup_form.php" role="form">
+                                            <input name="id" type="hidden" value="<?php echo $_GET['user']; ?>">
                                             <div class="form-group">
-                                                <label>Name:</label>
-                                                <input name="name" type="text" class="form-control" placeholder="Subject Name" required>
+                                                <label>First name:</label>
+                                                <input name="fname" type="text" class="form-control" placeholder="First name" value="<?php echo $row['Fname']; ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Description:</label>
-                                                <input name="descrip" type="text" class="form-control" placeholder="Description">
+                                                <label>Middle name:</label>
+                                                <input name="mname" type="text" class="form-control" placeholder="Middle name" value="<?php echo $row['Mname']; ?>" required>
                                             </div>
-                                        
+                                            <div class="form-group">
+                                                <label>last name:</label>
+                                               <input name="lname" type="text" class="form-control" placeholder="Last name" value="<?php echo $row['Lname']; ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address:</label>
+                                                <input name="address" type="text" class="form-control" placeholder="Address" value="<?php echo $row['address']; ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Contact number:</label>
+                                                <input name="cnum" type="text" class="form-control" placeholder="Contact number" value="<?php echo $row['Cnumber']; ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>User name:</label>
+                                                <input name="uname" type="text" class="form-control" placeholder="Username" value="<?php echo $row['username']; ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password:</label>
+                                                <input name="pass" type="password" class="form-control" placeholder="Password" value="<?php echo $row['password']; ?>"  required>
+                                            </div>
+
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">
-                                            <a class="btn btn-primary" href="../pages/subjects.php">Back </a>
+                                            <a class="btn btn-primary" href="../pages/users.php">Back </a>
                                         </form>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->

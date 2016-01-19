@@ -75,8 +75,6 @@ $result = mysql_query("SELECT quest.*,subj.name FROM questions as quest , subjec
 
                 <div class="panel-body">
                    <a href="../forms/question_form.php"> <button type="button" class="btn btn-primary">Add new</button> </a>
-                    <button type="button" class="btn btn-primary">Edit selected</button>
-                    <button type="button" class="btn btn-primary">Delete selected</button>
                 </div>
                  <!-- /.row -->
                 <div class="row">
@@ -95,6 +93,7 @@ $result = mysql_query("SELECT quest.*,subj.name FROM questions as quest , subjec
                                                 <th>Subject</th>
                                                 <th>Question</th>
                                                 <th>Question Photo</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -107,7 +106,8 @@ $result = mysql_query("SELECT quest.*,subj.name FROM questions as quest , subjec
                                                 <td><?php echo $row['id']; ?></td>
                                                 <td><?php echo $row['name']; ?></td>
                                                 <td><?php echo $row['question']; ?></td>
-                                                 <td><img src="<?php echo $row['image_url']; ?>" width="100px" height="100px"> </td>
+                                                <td><img src="<?php echo $row['image_url']; ?>" width="100px" height="100px"> </td>
+                                                <td><a href="../forms/edit_question_form.php?quest=<?php echo $row['id']; ?>"><button  class="fa fa-edit"></button></a> <a onclick="return confirm('Are you sure you want to delete?');" href="../php/delete.php?quest=<?php echo $row['id']; ?>"><button  class=" fa fa-trash-o"></button></a></td>
                                             </tr>
                                         <?php
                                                 }
