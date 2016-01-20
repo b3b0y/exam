@@ -101,11 +101,11 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                                         </div>
                                             <div class="form-group">
                                                 <label>General weighted average (0 - 100): </label>
-                                                <input name="gwa" type="text" class="form-control" placeholder="General weighted average" required>
+                                                <input name="gwa" type="number" min="0" max="100" class="form-control" placeholder="General weighted average" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Interview (0 - 20):</label>
-                                                <input name="int" type="text" class="form-control" placeholder="Interview">
+                                                <input name="int" type="number" min="0" max="20" class="form-control" placeholder="Interview" required>
                                             </div>
                                         
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">

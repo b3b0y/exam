@@ -91,11 +91,11 @@ $row1 = mysql_fetch_array($result);
                                         </div>
                                             <div class="form-group">
                                                 <label>General weighted average (0 - 100): </label>
-                                                <input name="gwa" type="text" class="form-control" placeholder="General weighted average" value="<?php echo $row1['gwa']; ?>" required>
+                                                <input name="gwa" type="number" class="form-control" placeholder="General weighted average" value="<?php echo $row1['gwa']; ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Interview (0 - 20):</label>
-                                                <input name="int" type="text" class="form-control" placeholder="Interview" value="<?php echo $row1['interview']; ?>" required>
+                                                <input name="int" type="number" class="form-control" placeholder="Interview" value="<?php echo $row1['interview']; ?>" required>
                                             </div>
                                         
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">

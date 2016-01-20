@@ -99,7 +99,7 @@ $result = mysql_query("SELECT * FROM percentage") or die("Error: ". mysql_error(
                                             <h2><?php echo$row['title']; ?></h2>
                                              <div class="form-group">
                                                 <label>Percent (%)</label>
-                                                <input name="percent"  type="text" class="form-control" placeholder="percentage" value="<?php echo $row['percent']; ?>" required>
+                                                <input name="percent"  type="number" min="0" max="100" class="form-control" placeholder="percentage" value="<?php echo $row['percent']; ?>" required>
                                                 <input type="hidden" value="<?php echo $row['id']; ?>" name='id'>
                                             </div>
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">
