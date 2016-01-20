@@ -25,7 +25,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == 'STUDENT')
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Dolores National Highschool Entrance Exam</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,6 +63,40 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == 'STUDENT')
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
+                <?php
+                    if(isset($_GET['db']) && $_GET['db'] == true)
+                    {    
+                ?>
+                    <form name="import" action="../backup/db_backup.php" method="POST" enctype="multipart/form-data">    
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                   Restore
+                                </div>
+                                <div class="panel-body">
+                                    <label>Database to Restore from: </label><input type="file" name="rfile" required/>
+                                    <br>
+                                    <input type="submit" name="restore" value="Restore">
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+                    <form name="import" action="../backup/db_backup.php" method="POST" enctype="multipart/form-data">
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                   Backup
+                                </div>
+                                <div class="panel-body">
+                                    <label>Click to Backup Database: </label>
+                                     <input type="submit"  name="backup" value="Backup" onclick="return confirm('Are you sure you want to backup your database?');">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                <?php
+                    }
+                ?>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->

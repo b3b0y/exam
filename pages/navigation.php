@@ -35,10 +35,10 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="../pages/subjects.php"><i class="fa fa-fw"></i> Subjects</a>
+                            <a href="../pages/subjects.php"><i class="fa fa-book"></i> Subjects</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa  fa-fw"></i> Questions Management<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa  fa-question-circle"></i> Questions Management<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="../pages/questions.php">Questions</a>
@@ -80,15 +80,19 @@
                             <a href="../pages/percentage.php"><i class="fa  fa-fw"></i> Percentage Settings</a>
                         </li>
                          <li>
-                            <a href="#"><i class="fa fa-fw"></i> Accounts settings <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-users"></i> Accounts settings <span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level">
                                 <li>
-                                     <a href="../pages/users.php?user=5">Admin</a>
+                                     <a href="../pages/users.php?user=5"><i class="fa fa-user"></i> Admin</a>
                                 </li>
                                 <li>
-                                    <a href="../pages/users.php?user=1">Student</a>
+                                    <a href="../pages/users.php?user=1"><i class="fa fa-user"></i> Student</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="index.php?db=true"><i class="fa  fa-database"></i> Backup Management </a>
+                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>
