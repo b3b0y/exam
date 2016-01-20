@@ -28,10 +28,10 @@ if(!isset($_SESSION['login']))
                 }
             }
         }
-        
+                
        mysql_query("INSERT INTO students(user_id,subject_id,raw_score,total_score,date) VALUES('".$_SESSION['user_id']."','".$_POST['subject_id']."','".$score."','".$_POST['total']."','".date('Y-m-d')."')") or die('Error: '. mysql_error());
     
-       echo "<script> window.location.href='exams.php'; </script>";
+      echo "<script> window.location.href='exams.php'; </script>";
     }
 
 $count = 0;
@@ -377,7 +377,7 @@ $raw_score = 0;
                                                                                 #display answers
                                                                         ?>
                                                                                 <div class="col-xs-6">
-                                                                                    <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
+                                                                                   <?php echo $row4['correct']; ?> <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
                                                                                     <label><?php echo $row4['text']; ?></label>
                                                                                 </div>
                                                                         <?php
@@ -448,7 +448,7 @@ $raw_score = 0;
                                                                 {
                                                             ?>
                                                                     <div class="col-xs-6">
-                                                                        <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
+                                                                        <?php echo $row4['correct']; ?><input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
                                                                         <label><?php echo $row4['text']; ?></label>
                                                                     </div>
                                                             <?php
