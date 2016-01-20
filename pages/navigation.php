@@ -71,7 +71,7 @@
                                     <a href="../pages/students_details.php">Students Answer Details</a>
                                 </li>
                                  <li>
-                                    <a href="../pages/students.php">Students Section</a>
+                                    <a href="../pages/students_section.php">Students Section</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
