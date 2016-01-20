@@ -18,8 +18,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 
         move_uploaded_file($_FILES['photo']['tmp_name'][$i], $image_url);
     }
-    $message = true;
-    //echo "<script> alert('Successfully saved'); window.location.href='../pages/questions.php' </script>";
+    echo "<script> alert('Successfully saved'); window.location.href='question_form.php' </script>";
 }
 
 

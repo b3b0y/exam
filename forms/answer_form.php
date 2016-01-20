@@ -10,8 +10,8 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
     }
 
     unset($_SESSION['subj']);
-    $message = true;
-    //echo "<script> alert('Successfully saved'); window.location.href='../pages/answers.php' </script>";
+
+    echo "<script> alert('Successfully saved'); window.location.href='answer_form.php' </script>";
 }
 
 
@@ -74,18 +74,6 @@ if(isset($_POST['subj']))
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <?php 
-                    if(isset($message)) 
-                    { 
-                ?>
-                    <div class="row">
-                        <div class="alert alert-success">
-                             Answer was added. 
-
-                             <a href="../pages/answers.php" class="alert-link">view</a>.
-                        </div>
-                    </div>
-                <?php } ?>
                     <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -125,7 +113,7 @@ if(isset($_POST['subj']))
                                                 <select name="row" required class="form-control" onchange='this.form.submit()'>
                                                     <option value="">SELECT</option>
                                                     <?php
-                                                        for ($i=1; $i <= 4; $i++) { 
+                                                        for ($i=1; $i <= 10; $i++) { 
                                                     ?>
                                                         <option value="<?php echo $i ?>" <?php echo ($_POST['row'] == $i) ? 'SELECTED' : false;  ?> > <?php echo $i ?></option>
                                                     <?php

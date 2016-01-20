@@ -9,7 +9,7 @@ if(!isset($_SESSION['login']))
 
 
 
-    if(isset($_POST['submit']))
+    if(isset($_POST['submit']) && $_POST['submit'] != "")
     {
         $score = 0;  
         for ($i=1; $i <= count($_POST['question']); $i++) 
@@ -30,12 +30,14 @@ if(!isset($_SESSION['login']))
         }
         
        mysql_query("INSERT INTO students(user_id,subject_id,raw_score,total_score,date) VALUES('".$_SESSION['user_id']."','".$_POST['subject_id']."','".$score."','".$_POST['total']."','".date('Y-m-d')."')") or die('Error: '. mysql_error());
+    
+       echo "<script> window.location.href='exams.php'; </script>";
     }
 
 $count = 0;
 $totalscore = 0;
 $button = false;
-
+$raw_score = 0;
 ?>
 
 <!DOCTYPE html>
@@ -170,6 +172,7 @@ $button = false;
                                                             </tr>
                                                         <?php
                                                                  $raw_score = $raw_score  + $row['raw_score'];
+                                                                 $total_items = $total_items + $row['total_score'];
                                                             }
                                                         ?>
                                                         </tbody>
@@ -178,9 +181,7 @@ $button = false;
                                                             $result1 = mysql_query("SELECT * FROM intgwa  WHERE user_id = '".$_SESSION['user_id']."'") or die("Error: ". mysql_error());
                                                             $row1 = mysql_fetch_array($result1);
 
-                                                            $result2 = mysql_query("SELECT * FROM questions") or die("Error: ". mysql_error());
-
-                                                            $totalquest = mysql_num_rows($result2);
+                                                            $totalquest = $total_items;
                                                             $gwa = $row1['gwa'];
                                                             $inter = $row1['interview'];
 
@@ -198,7 +199,7 @@ $button = false;
 
                                                         ?>
                                                                                                                         <p > Exam:<b> <?php echo $raw_score.' / ' .$totalquest; ?> </b></p>
-                                                            <p > GWA: <b> <?php echo $gwa ?> / 100 </b></p>
+                                                            <p >Grade GWA: <b> <?php echo $gwa ?> / 100 </b></p>
                                                             <p > Interview:<b> <?php echo $inter ?> / 20 </b></p>
 
                                                         <?php

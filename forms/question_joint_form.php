@@ -7,8 +7,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
     mysql_query("INSERT INTO question_joint(question_id,quest_cat_id) VALUES('".$_POST['quest']."','".$_POST['category']."')") or die('Error: '. mysql_error());
        
     unset($_SESSION['subj']);
-    $message = true;
-    //echo "<script> alert('Successfully saved'); window.location.href='../pages/questions_joint.php' </script>";
+    echo "<script> alert('Successfully saved'); window.location.href='question_joint_form.php' </script>";
 }
 
 

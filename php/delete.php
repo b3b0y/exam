@@ -18,10 +18,23 @@ if(isset($_GET['section']) && $_GET['section'] != "")
 
 if(isset($_GET['user']) && $_GET['user'] != "")
 {
+	$result = mysql_query("SELECT * FROM users WHERE id = '".$_GET['user']."'");
+	if(mysql_num_rows($result) > 0)
+	{
+		$row = mysql_fetch_array($result);
+		if($row['ULevel'] == 5)
+		{
+			echo "<script> alert('Cant Delete Admin'); window.location.href='../pages/users.php' </script>";
+		}
+		else
+		{
+			mysql_query("DELETE FROM users WHERE id = '".$_GET['user']."'");
+			echo "<script> alert('Successfully Deleted'); window.location.href='../pages/users.php' </script>";
+		}
 
-	mysql_query("DELETE FROM users WHERE id = '".$_GET['user']."'");
-
-	echo "<script> alert('Successfully Deleted'); window.location.href='../pages/users.php' </script>";
+	}
+	
+	
 }
 
 if(isset($_GET['answer']) && $_GET['answer'] != "")

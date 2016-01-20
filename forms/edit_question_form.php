@@ -4,9 +4,9 @@ require_once('../php/config.php');
 if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 {
 
-        if($_FILES["photo"]['size'][$i] != 0)
+        if($_FILES["photo"]['size'] != 0)
         { 
-            $image_url = '../question_photo/'.$_FILES["photo"]["name"][$i]; 
+            $image_url = '../question_photo/'.$_FILES["photo"]["name"]; 
         }
         else
         {
@@ -15,7 +15,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
 
         mysql_query("UPDATE questions SET subject_id = '".$_POST['subj']."' , question = '".$_POST['descrip']."' , image_url= '".$image_url."' WHERE id = '".$_POST['id']."'") or die('Error: '. mysql_error());
 
-        move_uploaded_file($_FILES['photo']['tmp_name'][$i], $image_url);
+        move_uploaded_file($_FILES['photo']['tmp_name'], $image_url);
 
     echo "<script> alert('Successfully UPDATED'); window.location.href='../pages/questions.php' </script>";
 }

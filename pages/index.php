@@ -76,7 +76,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == 'STUDENT')
                                 <div class="panel-body">
                                     <label>Database to Restore from: </label><input type="file" name="rfile" required/>
                                     <br>
-                                    <input type="submit" name="restore" value="Restore">
+                                    <input type="submit" name="restore" value="Restore" onclick="return confirm('Are you sure you want to Restore this selected database?');">
                                 </div>
                             </div>
                         </div> 

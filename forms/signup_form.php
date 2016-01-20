@@ -102,7 +102,7 @@ else
                                             </div>
                                             <div class="form-group">
                                                 <label>Contact number:</label>
-                                                <input name="cnum" type="number" class="form-control" placeholder="Contact number" required>
+                                                <input name="cnum" type="number" min='0' class="form-control" placeholder="Contact number" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>User name:</label>
