@@ -105,8 +105,7 @@ $result = mysql_query("SELECT * from student_section as ssec, users , sections a
                                                  <td><?php echo $row['Lname'] .', '.  $row['Fname'] .' '. $row['Mname']; ?></td>
                                                 <td><?php echo $row['GWA']; ?></td>
                                                 <td><?php echo $row['section']; ?></td>
-                                                <td><a href="../pages/print_section.php?user=<?php echo $row['user_id']; ?>" ><button  class="fa fa-print" ></button></a></td>
-
+                                                <td><a href="../pages/print_section.php?user=<?php echo $row['user_id']; ?>" ><button  class="fa fa-print" ></button></a> </td>
                                             </tr>
                                         <?php
                                                 }

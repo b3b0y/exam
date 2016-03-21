@@ -60,7 +60,7 @@ $button = false;
                     <div class="col-lg-12">
                         <div class="panel-body">
                             <script>
-                               window.print();
+                              window.print();
 
                                 function printpage()
                                 {
@@ -73,8 +73,6 @@ $button = false;
                                   .hide-from-printer{  display:none; }
                                 }
                             </style>
-                            <a  class="hide-from-printer" href="students_section.php"><button class="hide-from-printer"  type="button">Back</button></a>
-                            <input class="hide-from-printer" type="button" value="Print" onclick="printpage()">
                         </div>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -116,7 +114,7 @@ $button = false;
                                                
                                                 <div class="row show-grid">
                                                     <div class="col-xs-6">Name: <u><b> <?php echo $row['Fname']." ".$row['Mname']." ".$row['Lname']; ?></b></u></div>
-                                                    <div class="col-xs-6">Date: ___________________________</div>
+                                                    <div class="col-xs-6">Date: <u><b><?php echo date("Y/m/d"); ?> </b></u></div>
                                                 </div>
                                                 <div class="row show-grid">
                                                     <div class="col-xs-6">Home Address: <u><b> <?php echo $row['address'] ?></b></u></div>
@@ -169,7 +167,7 @@ $button = false;
                                                     $gwa = $row1['gwa'];
                                                     $inter = $row1['interview'];
 
-                                                    $result4 = mysql_query("SELECT * from student_section as ssec, users , sections as sec WHERE ssec.user_id = users.id AND ssec.section_id = sec.id AND user_id = '".$_GET['user']."'") or die("Error: ". mysql_error());
+                                                    $result4 = mysql_query("SELECT * from student_section as ssec, users  , sections as sec WHERE ssec.user_id = users.id AND sec.id = ssec.section_id   AND user_id = '".$_GET['user']."'") or die("Error: ". mysql_error());
                                                     $row4 = mysql_fetch_array($result4);
                                                 ?>
                                                     <p >Entrance Exam:<b> <?php echo $raw_score.' / ' .$totalquest; ?> </b></p>
@@ -191,6 +189,9 @@ $button = false;
                                         <div class="row show-grid">
                                             <div class="col-xs-6">Signed By: ______________________</div>
                                         </div>
+
+                                        <a  class="hide-from-printer" href="students_section.php"><button class="hide-from-printer"  type="button">Back</button></a>
+                                        <input class="hide-from-printer" type="button" value="Print" onclick="printpage()">
                                     </div>
                                     <!-- /.table-responsive -->
                                 </div>

@@ -105,7 +105,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Save')
                                             </div>
                                             <div class="form-group">
                                                 <label>Interview (0 - 20):</label>
-                                                <input name="int" type="number" min="0" max="20" class="form-control" placeholder="Interview" required>
+                                                <input name="int" type="currency" min="0" max="20" class="form-control" placeholder="Interview" required>
                                             </div>
                                         
                                             <input type="submit" name="submit" value="Save" class="btn btn-primary">

@@ -208,19 +208,18 @@ $raw_score = 0;
                                                             if(mysql_num_rows($result) == 0)
                                                             {
                                                                 $totalscore = $totalexam + $totalgwa + $totalinter ;
-                                                            
+                                                                /*
                                                                 $result4 = mysql_query("SELECT * FROM sections WHERE  '".$totalscore."'  >= min AND '".$totalscore."' <= max  ") or die("Error: ". mysql_error());
                                                                 $row4 = mysql_fetch_array($result4);
-
+                                                                */
                                                                 $result5 = mysql_query("SELECT * FROM student_section WHERE user_id = '".$_SESSION['user_id']."'");
                                                                 if(mysql_num_rows($result5) == 0)
                                                                 {
-                                                                    mysql_query("INSERT INTO student_section(section_id,user_id,GWA) VALUES('".$row4['id']."','".$_SESSION['user_id']."','".number_format($totalscore,2)."')");
-                                                                    echo "string";
+                                                                    mysql_query("INSERT INTO student_section(user_id,GWA) VALUES('".$_SESSION['user_id']."','".number_format($totalscore,2)."')");
                                                                 }
                                                     ?>  
                                                             <p> Final Average:<b> <?php echo number_format($totalscore,2); ?>% </b></p>
-                                                            <p> Your Section is:<b> <?php echo $row4['section']; ?> </b></p>
+                                                            
                                                     <?php 
                                                             }
                                                         }
@@ -377,7 +376,7 @@ $raw_score = 0;
                                                                                 #display answers
                                                                         ?>
                                                                                 <div class="col-xs-6">
-                                                                                   <?php echo $row4['correct']; ?> <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
+                                                                                    <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
                                                                                     <label><?php echo $row4['text']; ?></label>
                                                                                 </div>
                                                                         <?php
@@ -448,7 +447,7 @@ $raw_score = 0;
                                                                 {
                                                             ?>
                                                                     <div class="col-xs-6">
-                                                                        <?php echo $row4['correct']; ?><input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
+                                                                        <input type="radio" name="answer<?php echo $count; ?>[<?php echo $count; ?>]" id="optionsRadiosInline" value="<?php echo $row4['id']; ?>" >
                                                                         <label><?php echo $row4['text']; ?></label>
                                                                     </div>
                                                             <?php

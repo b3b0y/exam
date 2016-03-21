@@ -85,4 +85,14 @@ if(isset($_GET['intgwa']) && $_GET['intgwa'] != "")
 	echo "<script> alert('Successfully Deleted'); window.location.href='../pages/interview.php' </script>";
 }
 
+if(isset($_GET['retake']) && $_GET['retake'] != "")
+{
+
+	mysql_query("DELETE FROM students WHERE user_id = '".$_GET['retake']."'");
+	mysql_query("DELETE FROM student_details WHERE user_id = '".$_GET['retake']."'");
+	mysql_query("DELETE FROM student_section WHERE user_id = '".$_GET['retake']."'");
+
+	echo "<script> alert('Successfully Remove'); window.location.href='../pages/students_section.php' </script>";
+}
+
 ?>
